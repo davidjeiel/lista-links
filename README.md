@@ -1,57 +1,52 @@
-# Lista Links - Documentação
+# Lista de Links
 
-Este repositório contém um código em Python que permite verificar links quebrados em um site. Ele analisa todas as páginas de um site e verifica a validade dos links, informando quais links estão quebrados e em quais páginas eles estão alocados.
+Este é um projeto em Python que verifica os links de um site e fornece informações sobre cada um deles, como a página onde o link está alocado, o link com problema, o status de requisição desse link e o tipo de link.
 
-## Como usar
+## Requisitos
 
-Para utilizar o código fornecido neste repositório, siga as etapas abaixo:
+- Python 3.x
+- Bibliotecas Python: requests, BeautifulSoup, pandas, openpyxl, tqdm
 
-1. Clone o repositório para o seu ambiente local:
+## Instalação
 
-```bash
-git clone https://github.com/davidjeiel/lista-links.git
-```
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/davidjeiel/lista-links.git
+   ```
 
-2. Certifique-se de ter o Python 3 instalado em seu sistema.
+2. Acesse o diretório do projeto:
+   ```bash
+   cd lista-links
+   ```
 
-3. Instale as dependências necessárias, como o módulo `beautifulsoup4`, usando o gerenciador de pacotes `pip`:
+3. Instale as dependências:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-```bash
-pip install beautifulsoup4
-```
+## Uso
 
-4. Navegue até o diretório do projeto e execute o script `lista_links.py` informando a URL que deseja verificar:
+1. Execute o arquivo `check_links.py`:
+   ```bash
+   python check_links.py
+   ```
 
-```bash
-cd lista-links
-python lista_links.py https://www.example.com
-```
+2. Será solicitado que você insira a URL do site que deseja verificar.
 
-Substitua `https://www.example.com` pela URL do site que deseja verificar.
+3. Escolha o tipo de resposta que deseja receber:
+   - Digite `1` para gerar um arquivo de texto com os resultados.
+   - Digite `2` para gerar um arquivo CSV com os resultados.
+   - Digite `3` para gerar um arquivo Excel (xlsx) com os resultados.
+   - Digite `4` para exibir os resultados em tela.
 
-## Funcionamento
-
-O código irá iniciar a verificação da URL informada, analisando todas as páginas do site e os links presentes em cada página. Para cada link encontrado, será feita uma requisição HTTP para verificar o status do link. Os links com status diferente de 200 serão considerados quebrados e serão listados no resultado.
-
-## Exemplo de saída
-
-A saída do código irá apresentar os links quebrados encontrados, juntamente com as páginas em que estão alocados e o status de cada link. Por exemplo:
-
-```
-Página: https://www.example.com/pagina1, Link: https://www.example.com/link-quebrado, Status: 404
-Página: https://www.example.com/pagina2, Link: https://www.example.com/outro-link-quebrado, Status: 404
-Página: https://www.example.com/pagina3, Link: https://www.example.com/mais-um-link-quebrado, Status: 404
-```
-
-## Observações
-
-- Certifique-se de ter uma conexão estável com a internet, pois o código fará várias requisições HTTP para verificar os links.
-- O código verificará todos os links encontrados, incluindo links externos. Se você quiser limitar a verificação apenas aos links internos do site, você pode fazer uma modificação no código para verificar a URL base e ignorar os links externos.
+4. Dependendo da sua escolha, os resultados serão exibidos em tela, ou um arquivo de texto, CSV ou Excel será gerado contendo os resultados.
 
 ## Contribuição
 
-Se você encontrar problemas, bugs ou quiser contribuir para este projeto, sinta-se à vontade para abrir um "issue" ou enviar um "pull request" para o repositório.
+Contribuições são bem-vindas! Se você tiver sugestões, melhorias ou correções, fique à vontade para abrir um Pull Request.
 
 ## Licença
 
-Este projeto está sob a Licença MIT - consulte o arquivo [LICENSE](LICENSE) para obter mais detalhes.
+Este projeto está licenciado sob a [MIT License](LICENSE).
+
+---
