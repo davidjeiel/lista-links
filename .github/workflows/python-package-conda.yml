@@ -1,14 +1,34 @@
-- name: Setup Miniconda
-  uses: conda-incubator/setup-miniconda@v2
-  with:
-    auto-update-conda: true
-    python-version: 3.9
-    activate-environment: lista-links
-    environment-file: environment.yml
-    use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
-- name: Install dependencies
-  shell: bash -l {0}
-  run: |
-    conda info -v # mostra informações sobre o conda e o ambiente
-    conda list -v # mostra a lista de pacotes instalados
-    conda install -v -y --file requirements.txt # instala as dependências com mais detalhes
+name: Python Package using Conda
+
+on: [push]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.10'
+    - name: Add conda to system path
+      run: |
+        # $CONDA is an environment variable pointing to the root of the miniconda directory
+        echo $CONDA/bin >> $GITHUB_PATH
+    - name: Install dependencies
+      run: |
+        conda env update --file .github/workflows/environment.yml --name base
+    - name: Lint with flake8
+      run: |
+        conda install flake8
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Test with pytest
+      run: |
+        conda install pytest
+        pytest
