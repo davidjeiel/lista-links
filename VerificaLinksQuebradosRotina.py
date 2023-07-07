@@ -73,7 +73,7 @@ def check_links(url):
 def check_links_on_pages(pages):
     all_links = []
 
-    for page in tqdm(pages, desc="Verificando links na página: "+ page['page'], unit="página"):
+    for page in tqdm(pages, desc="Verificando links na página: ", unit="página"):
         page_links = check_links(page['link'])
         all_links.extend(page_links)
 
